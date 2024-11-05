@@ -1,5 +1,6 @@
 package com.nitastefan.peak_planner.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nitastefan.peak_planner.entity.enums.Type;
 import jakarta.persistence.*;
 
@@ -22,8 +23,7 @@ public class Plan {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "plan_id")
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.REMOVE)
     private List<Activity> activities;
 
 

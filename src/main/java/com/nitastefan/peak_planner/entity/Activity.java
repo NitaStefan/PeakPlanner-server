@@ -1,5 +1,6 @@
 package com.nitastefan.peak_planner.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.nitastefan.peak_planner.entity.enums.Priority;
 import jakarta.persistence.*;
 
@@ -28,9 +29,14 @@ public class Activity {
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "activity_id")
-    private List<Step> steps;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "plan_id")
+    @JsonIgnore
+    private Plan plan;
+
+    @OneToMany(mappedBy = "activity", cascade = {CascadeType.REMOVE})
+//    @JsonIgnore
+    private List<Step> steps = new ArrayList<>();
 
     public Activity() {
     }
@@ -82,6 +88,14 @@ public class Activity {
         this.priority = priority;
     }
 
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
+
     public List<Step> getSteps() {
         return steps;
     }
@@ -90,12 +104,13 @@ public class Activity {
         this.steps = steps;
     }
 
-    public void addStep(Step theStep) {
-
-        if (steps == null) steps = new ArrayList<>();
-
-        steps.add(theStep);
-    }
+//    public void addStep(Step theStep) {
+//
+//        if (steps == null) steps = new ArrayList<>();
+//
+//        steps.add(theStep);
+//        theStep.setActivity(this);
+//    }
 
     @Override
     public String toString() {

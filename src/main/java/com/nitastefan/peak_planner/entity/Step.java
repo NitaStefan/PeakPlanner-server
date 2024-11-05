@@ -1,5 +1,6 @@
 package com.nitastefan.peak_planner.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -16,6 +17,11 @@ public class Step {
 
     @Column(name = "description")
     private String description;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "activity_id")
+    @JsonIgnore
+    private Activity activity;
 
     public Step() {
     }
@@ -47,6 +53,14 @@ public class Step {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Activity getActivity() {
+        return activity;
+    }
+
+    public void setActivity(Activity activity) {
+        this.activity = activity;
     }
 
     @Override
