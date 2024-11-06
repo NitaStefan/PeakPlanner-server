@@ -7,6 +7,7 @@ import com.nitastefan.peak_planner.entity.Step;
 import com.nitastefan.peak_planner.entity.enums.Type;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,8 +20,8 @@ public class AppService implements IAppService {
     }
 
     @Override
-    public List<Plan> findPlansAndActivitiesByType(Type type) {
-        return appDAO.findPlansAndActivitiesByType(type);
+    public List<Plan> findPlansByType(Type type) {
+        return appDAO.findPlansByType(type);
     }
 
     @Override
@@ -32,6 +33,19 @@ public class AppService implements IAppService {
     public Plan save(Plan thePlan) {
 
         return appDAO.save(thePlan);
+    }
+
+    @Override
+    public List<Plan> save(List<Plan> thePlans) {
+
+        List<Plan> savedPlans = new ArrayList<>();
+
+        for (Plan plan : thePlans) {
+            plan.setId(0);
+            savedPlans.add(appDAO.save(plan));
+        }
+
+        return savedPlans;
     }
 
     @Override
@@ -59,6 +73,18 @@ public class AppService implements IAppService {
     public void deletePlanById(int id) {
 
         appDAO.deletePlanById(id);
+    }
+
+    @Override
+    public void deleteExistingPlansOfType(Type theType) {
+
+        List<Plan> thePlans = findPlansByType(theType);
+
+        // test lazy loading after
+
+        for (Plan plan : thePlans)
+            deletePlanById(plan.getId());
+
     }
 
     @Override

@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface IAppDAO {
 
-    List<Plan> findPlansAndActivitiesByType(Type type);
+    List<Plan> findPlansByType(Type type);
 
     Plan findPlanById(int id);
 

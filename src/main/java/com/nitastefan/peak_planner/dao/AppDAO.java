@@ -43,7 +43,7 @@ public class AppDAO implements IAppDAO {
     }
 
     @Override
-    public List<Plan> findPlansAndActivitiesByType(Type type) {
+    public List<Plan> findPlansByType(Type type) {
 
         TypedQuery<Plan> query = entityManager.createQuery(
                 "SELECT p FROM Plan p "

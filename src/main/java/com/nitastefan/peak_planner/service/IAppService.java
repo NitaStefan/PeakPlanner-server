@@ -9,11 +9,13 @@ import java.util.List;
 
 public interface IAppService {
 
-    List<Plan> findPlansAndActivitiesByType(Type type);
+    List<Plan> findPlansByType(Type type);
 
     Activity findActivityById(int id);
 
     Plan save(Plan thePlan);
+
+    List<Plan> save(List<Plan> thePlans);
 
     Activity save(Activity theActivity);
 
@@ -22,6 +24,8 @@ public interface IAppService {
     void saveActivityForPlan(Activity theActivity, int planId);
 
     void deletePlanById(int id);
+
+    void deleteExistingPlansOfType(Type theType);
 
     void deleteActivityById(int id);
 }

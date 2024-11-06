@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @org.springframework.web.bind.annotation.RestController
+@CrossOrigin(origins = "http://localhost:5173/")
 @RequestMapping("/api")
 public class RestController {
 
@@ -22,7 +23,7 @@ public class RestController {
     @GetMapping("/plans")
     public List<Plan> getPlansByType(@RequestParam("type") Type type) {
 
-        return appService.findPlansAndActivitiesByType(type);
+        return appService.findPlansByType(type);
     }
 
     @GetMapping("/activities/{activityId}")
@@ -58,6 +59,14 @@ public class RestController {
         thePlan.setId(0);
 
         return appService.save(thePlan);
+    }
+
+    @PostMapping("/plans/bulk")
+    public List<Plan> addRoutinePlans(@RequestBody List<Plan> thePlans) {
+
+        appService.deleteExistingPlansOfType(Type.ROUTINE);
+
+        return appService.save(thePlans);
     }
 
     @PutMapping("/activities/{activityId}")

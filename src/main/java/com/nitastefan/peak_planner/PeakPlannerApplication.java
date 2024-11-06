@@ -22,7 +22,7 @@ public class PeakPlannerApplication {
 //	public CommandLineRunner commandLineRunner(IAppDAO appDAO) {
 //
 //		return runner -> {
-//			findPlansByType(appDAO);
+//			findActivityById(appDAO);
 //		};
 //	}
 //
@@ -33,14 +33,15 @@ public class PeakPlannerApplication {
 //		List<Plan> tempPlans = appDAO.findPlansAndActivitiesByType(type);
 //
 //		System.out.println("the planes of type: " + type + ", are here: " + tempPlans);
+////		System.out.println(tempPlans.get(0).getActivities()); // no access, lazy init
 //	}
 //
 //	private void findActivityById(IAppDAO appDAO) {
 //
-//		Activity tempActivity = appDAO.findActivityById(14);
+//		Activity tempActivity = appDAO.findActivityById(16);
 //		System.out.println("the activity: " + tempActivity);
-//		System.out.println("the plan");
-//		System.out.println(tempActivity.getPlan());
+//		System.out.println("the steps");
+////		System.out.println(tempActivity.getSteps()); // no access, lazy init
 //
 //	}
 
