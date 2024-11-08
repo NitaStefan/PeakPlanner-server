@@ -13,15 +13,15 @@ public interface IAppService {
 
     Activity findActivityById(int id);
 
-    Plan save(Plan thePlan);
+    Plan persist(Plan thePlan);
 
-    List<Plan> save(List<Plan> thePlans);
+    List<Plan> persist(List<Plan> thePlans);
 
-    Activity save(Activity theActivity);
+    Activity update(Activity theActivity, int activityId);
 
-    void saveStepForActivity(Step theStep, int activityId);
+    Step persistStepForActivity(Step theStep, int activityId);
 
-    void saveActivityForPlan(Activity theActivity, int planId);
+    Activity persistActivityForPlan(Activity theActivity, int planId);
 
     void deletePlanById(int id);
 

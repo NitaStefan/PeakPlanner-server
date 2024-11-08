@@ -29,36 +29,25 @@ public class RestController {
     @GetMapping("/activities/{activityId}")
     public Activity findActivityById(@PathVariable int activityId) {
 
-        Activity tempActivity = appService.findActivityById(activityId);
-
-        System.out.println("the activity: " + tempActivity);
-        System.out.println("its plan: " + tempActivity.getPlan());
-
-        return tempActivity;
+        return appService.findActivityById(activityId);
     }
 
     @PostMapping("/activities/{activityId}/steps")
-    public void addStepForActivity(@RequestBody Step theStep, @PathVariable int activityId) {
+    public Step addStepForActivity(@RequestBody Step theStep, @PathVariable int activityId) {
 
-        theStep.setId(0);
-
-        appService.saveStepForActivity(theStep, activityId);
+        return appService.persistStepForActivity(theStep, activityId);
     }
 
     @PostMapping("/plans/{planId}/activities")
-    public void addActivityForPlan(@RequestBody Activity theActivity, @PathVariable int planId) {
+    public Activity addActivityForPlan(@RequestBody Activity theActivity, @PathVariable int planId) {
 
-        theActivity.setId(0); // in case some id is added to JSON; this forces a save of new item
-
-        appService.saveActivityForPlan(theActivity, planId);
+        return appService.persistActivityForPlan(theActivity, planId);
     }
 
     @PostMapping("/plans")
     public Plan addPlan(@RequestBody Plan thePlan) {
 
-        thePlan.setId(0);
-
-        return appService.save(thePlan);
+        return appService.persist(thePlan);
     }
 
     @PostMapping("/plans/bulk")
@@ -66,20 +55,13 @@ public class RestController {
 
         appService.deleteExistingPlansOfType(Type.ROUTINE);
 
-        return appService.save(thePlans);
+        return appService.persist(thePlans);
     }
 
-    @PutMapping("/activities/{activityId}")
-    public void updateActivityById(@RequestBody Activity theActivity, @PathVariable int activityId) {
+    @PutMapping("/activities/{oldActivityId}")
+    public Activity updateActivityById(@RequestBody Activity newActivity, @PathVariable int oldActivityId) {
 
-        Activity oldActivity = appService.findActivityById(activityId);
-
-        if (oldActivity == null)
-            throw new RuntimeException("Activity with id " + activityId + " not found");
-
-        theActivity.setId(activityId);
-        theActivity.setPlan(oldActivity.getPlan());
-        appService.save(theActivity);
+        return appService.update(newActivity, oldActivityId);
     }
 
     @DeleteMapping("/plans/{planId}")

@@ -38,10 +38,10 @@ public class PeakPlannerApplication {
 //
 //	private void findActivityById(IAppDAO appDAO) {
 //
-//		Activity tempActivity = appDAO.findActivityById(16);
+//		Activity tempActivity = appDAO.findActivityById(1);
 //		System.out.println("the activity: " + tempActivity);
 //		System.out.println("the steps");
-////		System.out.println(tempActivity.getSteps()); // no access, lazy init
+//		System.out.println(tempActivity.getSteps()); // no access, lazy init
 //
 //	}
 

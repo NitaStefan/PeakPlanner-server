@@ -26,17 +26,21 @@ public class AppService implements IAppService {
 
     @Override
     public Activity findActivityById(int id) {
+
+        // if @JsonIgnore, retrieve based on the getter
         return appDAO.findActivityById(id);
     }
 
     @Override
-    public Plan save(Plan thePlan) {
+    public Plan persist(Plan thePlan) {
+
+        thePlan.setId(0);
 
         return appDAO.save(thePlan);
     }
 
     @Override
-    public List<Plan> save(List<Plan> thePlans) {
+    public List<Plan> persist(List<Plan> thePlans) {
 
         List<Plan> savedPlans = new ArrayList<>();
 
@@ -49,24 +53,38 @@ public class AppService implements IAppService {
     }
 
     @Override
-    public Activity save(Activity theActivity) {
-        return appDAO.save(theActivity);
+    public Activity update(Activity newActivity, int oldActivityId) {
+
+        Activity oldActivity = findActivityById(oldActivityId);
+
+        if (oldActivity == null)
+            throw new RuntimeException("Activity with id " + oldActivityId + " not found");
+
+        newActivity.setId(oldActivityId);
+        newActivity.setPlan(oldActivity.getPlan());
+        // the steps remain associated with that activity's id
+
+        return appDAO.save(newActivity);
     }
 
     @Override
-    public void saveStepForActivity(Step theStep, int activityId) {
+    public Step persistStepForActivity(Step theStep, int activityId) {
+
+        theStep.setId(0);
 
         theStep.setActivity(appDAO.findActivityById(activityId));
 
-        appDAO.save(theStep);
+        return appDAO.save(theStep);
     }
 
     @Override
-    public void saveActivityForPlan(Activity theActivity, int planId) {
+    public Activity persistActivityForPlan(Activity theActivity, int planId) {
+
+        theActivity.setId(0);
 
         theActivity.setPlan(appDAO.findPlanById(planId));
 
-        appDAO.save(theActivity);
+        return appDAO.save(theActivity);
     }
 
     @Override
