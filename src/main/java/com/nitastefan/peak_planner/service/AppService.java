@@ -53,6 +53,19 @@ public class AppService implements IAppService {
     }
 
     @Override
+    public Plan update(Plan newPlan, int oldPlanId) {
+
+        Plan oldPlan = appDAO.findPlanById(oldPlanId);
+
+        if (oldPlan == null)
+            throw new RuntimeException("Plan with id " + oldPlanId + " not found");
+
+        newPlan.setId(oldPlanId);
+
+        return appDAO.save(newPlan);
+    }
+
+    @Override
     public Activity update(Activity newActivity, int oldActivityId) {
 
         Activity oldActivity = findActivityById(oldActivityId);

@@ -17,6 +17,8 @@ public interface IAppService {
 
     List<Plan> persist(List<Plan> thePlans);
 
+    Plan update(Plan thePlan, int planId);
+
     Activity update(Activity theActivity, int activityId);
 
     Step persistStepForActivity(Step theStep, int activityId);

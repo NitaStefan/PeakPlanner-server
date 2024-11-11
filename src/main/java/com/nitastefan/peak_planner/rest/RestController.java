@@ -58,6 +58,12 @@ public class RestController {
         return appService.persist(thePlans);
     }
 
+    @PutMapping("/plans/{oldPlanId}")
+    public Plan updatePlanById(@RequestBody Plan newPlan, @PathVariable int oldPlanId){
+
+        return appService.update(newPlan, oldPlanId);
+    }
+
     @PutMapping("/activities/{oldActivityId}")
     public Activity updateActivityById(@RequestBody Activity newActivity, @PathVariable int oldActivityId) {
 
