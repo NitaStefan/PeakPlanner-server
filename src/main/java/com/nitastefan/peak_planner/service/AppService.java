@@ -81,6 +81,19 @@ public class AppService implements IAppService {
     }
 
     @Override
+    public Step update(Step newStep, int oldStepId) {
+        Step oldStep = appDAO.findStepById(oldStepId);
+
+        if (oldStep == null)
+            throw new RuntimeException("Step with id " + oldStepId + " not found");
+
+        newStep.setId(oldStepId);
+        newStep.setActivity(oldStep.getActivity());
+
+        return appDAO.save(newStep);
+    }
+
+    @Override
     public Step persistStepForActivity(Step theStep, int activityId) {
 
         theStep.setId(0);

@@ -70,6 +70,12 @@ public class RestController {
         return appService.update(newActivity, oldActivityId);
     }
 
+    @PutMapping("/steps/{oldStepId}")
+    public Step updateStepById(@RequestBody Step newStep, @PathVariable int oldStepId) {
+
+        return appService.update(newStep, oldStepId);
+    }
+
     @DeleteMapping("/plans/{planId}")
     public void deletePlanById(@PathVariable int planId) {
 

@@ -67,6 +67,11 @@ public class AppDAO implements IAppDAO {
     }
 
     @Override
+    public Step findStepById(int id) {
+        return entityManager.find(Step.class, id);
+    }
+
+    @Override
     @Transactional
     public void deletePlanById(int id) {
 

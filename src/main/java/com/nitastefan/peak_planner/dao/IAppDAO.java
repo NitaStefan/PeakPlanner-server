@@ -15,6 +15,8 @@ public interface IAppDAO {
 
     Activity findActivityById(int id);
 
+    Step findStepById(int id);
+
     Plan save(Plan thePlan);
 
     Activity save(Activity theActivity);

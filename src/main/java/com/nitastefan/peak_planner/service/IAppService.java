@@ -21,6 +21,8 @@ public interface IAppService {
 
     Activity update(Activity theActivity, int activityId);
 
+    Step update(Step theStep, int stepId);
+
     Step persistStepForActivity(Step theStep, int activityId);
 
     Activity persistActivityForPlan(Activity theActivity, int planId);
