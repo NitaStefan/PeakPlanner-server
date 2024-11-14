@@ -136,4 +136,10 @@ public class AppService implements IAppService {
 
         appDAO.deleteActivityById(id);
     }
+
+    @Override
+    public void deleteStepById(int id) {
+
+        appDAO.deleteStepById(id);
+    }
 }

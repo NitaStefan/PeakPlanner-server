@@ -32,4 +32,6 @@ public interface IAppService {
     void deleteExistingPlansOfType(Type theType);
 
     void deleteActivityById(int id);
+
+    void deleteStepById(int id);
 }

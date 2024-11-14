@@ -26,4 +26,6 @@ public interface IAppDAO {
     void deletePlanById(int id);
 
     void deleteActivityById(int id);
+
+    void deleteStepById(int id);
 }

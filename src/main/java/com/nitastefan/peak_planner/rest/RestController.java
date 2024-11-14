@@ -87,4 +87,10 @@ public class RestController {
 
         appService.deleteActivityById(activityId);
     }
+
+    @DeleteMapping("/steps/{stepId}")
+    public void deleteStepById(@PathVariable int stepId) {
+
+        appService.deleteStepById(stepId);
+    }
 }

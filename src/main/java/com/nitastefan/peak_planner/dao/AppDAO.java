@@ -84,4 +84,11 @@ public class AppDAO implements IAppDAO {
 
         entityManager.remove(findActivityById(id));
     }
+
+    @Override
+    @Transactional
+    public void deleteStepById(int id) {
+
+        entityManager.remove(findStepById(id));
+    }
 }
