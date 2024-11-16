@@ -29,13 +29,12 @@ public class Activity {
     @Enumerated(EnumType.STRING)
     private Priority priority;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "plan_id")
     @JsonIgnore
     private Plan plan;
 
-    @OneToMany(mappedBy = "activity", cascade = {CascadeType.REMOVE})
-//    @JsonIgnore
+    @OneToMany(mappedBy = "activity", cascade = CascadeType.ALL)
     private List<Step> steps = new ArrayList<>();
 
     public Activity() {

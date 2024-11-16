@@ -18,7 +18,7 @@ public class Step {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "activity_id")
     @JsonIgnore
     private Activity activity;

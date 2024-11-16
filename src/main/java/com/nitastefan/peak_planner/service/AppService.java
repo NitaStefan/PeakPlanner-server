@@ -46,6 +46,11 @@ public class AppService implements IAppService {
 
         for (Plan plan : thePlans) {
             plan.setId(0);
+            for (Activity activity : plan.getActivities()){
+                activity.setPlan(plan);
+                for (Step step : activity.getSteps())
+                    step.setActivity(activity);
+            }
             savedPlans.add(appDAO.save(plan));
         }
 

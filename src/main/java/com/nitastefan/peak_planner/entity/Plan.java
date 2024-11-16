@@ -23,8 +23,8 @@ public class Plan {
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.REMOVE)
-    private List<Activity> activities;
+    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
+    private List<Activity> activities = new ArrayList<>();
 
 
     public Plan() {
@@ -69,9 +69,6 @@ public class Plan {
 
     // convenience method
     public void addActivity(Activity theActivity) {
-
-        if (activities == null) activities = new ArrayList<>();
-
         activities.add(theActivity);
     }
 
