@@ -34,7 +34,11 @@ public class AppService implements IAppService {
     @Override
     public Plan persist(Plan thePlan) {
 
-        thePlan.setId(0);
+        for (Activity activity : thePlan.getActivities()) {
+            activity.setPlan(thePlan);
+            for (Step step : activity.getSteps())
+                step.setActivity(activity);
+        }
 
         return appDAO.save(thePlan);
     }
@@ -46,7 +50,7 @@ public class AppService implements IAppService {
 
         for (Plan plan : thePlans) {
             plan.setId(0);
-            for (Activity activity : plan.getActivities()){
+            for (Activity activity : plan.getActivities()) {
                 activity.setPlan(plan);
                 for (Step step : activity.getSteps())
                     step.setActivity(activity);
